@@ -60,7 +60,8 @@ SELECT
 FROM (
     SELECT
         category,
-        100 * SUM(Diwali.`quantity_sold(after_promo)` - Diwali.`quantity_sold(before_promo)`) / SUM(Diwali.`quantity_sold(before_promo)`) AS ISU_percentage
+        100 * SUM(Diwali.`quantity_sold(after_promo)` - Diwali.`quantity_sold(before_promo)`) /
+        SUM(Diwali.`quantity_sold(before_promo)`) AS ISU_percentage
     FROM
         DiwaliCampaign Diwali
     GROUP BY
@@ -70,4 +71,38 @@ GROUP BY
     category
 ORDER BY
     rank_order;
-    
+
+-- Created a report that features top 5 products, ranked by incremental
+-- revenue percentage (IR%) across all campaigns (Diwali and Sankranti).    
+
+WITH Campaign AS (
+    SELECT
+        p.product_name,
+        c.campaign_name,
+        e.product_code,
+        e.`quantity_sold(before_promo)`,
+        e.`quantity_sold(after_promo)`,
+        p.category,
+        e.base_price
+    FROM
+        dim_campaigns c
+    JOIN
+        fact_events e ON c.campaign_id = e.campaign_id
+    JOIN
+        dim_products p ON e.product_code = p.product_code
+    WHERE
+        c.campaign_name IN ('Diwali', 'Sankranti')
+)
+
+SELECT
+    product_name,
+    category,
+    ROUND(100 * SUM(base_price * (`quantity_sold(after_promo)` - `quantity_sold(before_promo)`)) / 
+    SUM(base_price * `quantity_sold(before_promo)`), 2) AS ir_percentage
+FROM
+    Campaign
+GROUP BY
+    product_name, category
+ORDER BY
+    ir_percentage DESC
+LIMIT 5;
