@@ -1,4 +1,4 @@
--- Extracting list of products where base price is less than
+-- Extracting list of products where base price is greater than
 -- 500 and that are fratured promo type of 'BOGOF'.
 
 SELECT p.product_name as List_of_products
