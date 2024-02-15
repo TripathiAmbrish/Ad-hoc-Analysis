@@ -19,6 +19,7 @@ ORDER BY stores desc;
 
 -- Generated a report that displays campaign along with the
 -- total revenue before and after the promotion.
+
 SELECT
     c.campaign_name,
     SUM(e.base_price * e.`quantity_sold(before_promo)`) / 1000000 AS total_revenue_before_promo,
@@ -29,3 +30,44 @@ JOIN
     fact_events e ON c.campaign_id = e.campaign_id
 GROUP BY
     c.campaign_name;
+
+-- Derived a report that calculates incremental Sold Quantity (ISU%)
+-- for each category during the Diwali Campaign and rankings for the
+-- categories based on their ISU%.
+    
+WITH DiwaliCampaign AS (
+    SELECT
+        c.campaign_id,
+        c.campaign_name,
+        e.product_code,
+        e.`quantity_sold(before_promo)`,
+        e.`quantity_sold(after_promo)`,
+        p.category
+    FROM
+        dim_campaigns c
+    JOIN
+        fact_events e ON c.campaign_id = e.campaign_id
+    JOIN
+        dim_products p ON e.product_code = p.product_code
+    WHERE
+        c.campaign_name = 'Diwali'
+)
+
+SELECT
+    category,
+    ROUND(SUM(ISU_percentage), 2) AS ISU_percentage,
+    RANK() OVER (ORDER BY SUM(ISU_percentage) DESC) AS rank_order
+FROM (
+    SELECT
+        category,
+        100 * SUM(Diwali.`quantity_sold(after_promo)` - Diwali.`quantity_sold(before_promo)`) / SUM(Diwali.`quantity_sold(before_promo)`) AS ISU_percentage
+    FROM
+        DiwaliCampaign Diwali
+    GROUP BY
+        category
+) AS ISU
+GROUP BY
+    category
+ORDER BY
+    rank_order;
+    
