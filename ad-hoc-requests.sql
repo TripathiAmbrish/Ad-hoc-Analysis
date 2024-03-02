@@ -1,7 +1,7 @@
 -- Extracting list of products where base price is greater than
 -- 500 and that are fratured promo type of 'BOGOF'.
 
-SELECT p.product_name as List_of_products
+SELECT DISTINCT p.product_name as List_of_products
 FROM dim_products as p
 LEFT JOIN fact_events as e
      ON p.product_code = e.product_code
