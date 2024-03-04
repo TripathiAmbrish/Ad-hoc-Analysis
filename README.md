@@ -1,5 +1,7 @@
 # Ad-hoc-Analysis
 
+![Screenshot 2024-03-04 234908](https://github.com/TripathiAmbrish/Ad-hoc-Analysis/assets/139352292/d8a679e4-eb6c-4deb-836d-b625479bff0d)
+
 ## [Dashboard Link](https://www.novypro.com/project/ad-hoc-analysis-report)
 
 ## Project Overview
