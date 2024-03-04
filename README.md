@@ -1,5 +1,7 @@
 # Ad-hoc-Analysis
 
+## [Dashboard Link](https://www.novypro.com/project/ad-hoc-analysis-report)
+
 ## Project Overview
 
 Resume Project Challenge #9 organized by [Codebasics](https://codebasics.io/) and AtliQ Mart Analyse Promotions and Provide Tangible Insights to Sales Director. Conducting ad-hoc analysis for AtliQ Mart's promotion performance during Diwali 2023 and Sankranti 2024. Designing a comprehensive dashboard and creating a persuasive presentation with actionable insights for the Sales Director.
@@ -10,4 +12,3 @@ Conduct thorough metadata analysis, implement Tony Sharma's insights, and addres
 ## About Dataset
 This .csv dataset comprises Four tables - fact_events, dim_products, dim_stores and dim_campaigns. It contains unique IDs, product & store information and campaign details, product prices and promotion information for AtliQ Mart's promotions and sales.
 
-## [Dashboard Link](https://www.novypro.com/project/ad-hoc-analysis-report)
