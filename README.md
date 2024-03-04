@@ -14,3 +14,4 @@ Conduct thorough metadata analysis, implement Tony Sharma's insights, and addres
 ## About Dataset
 This .csv dataset comprises Four tables - fact_events, dim_products, dim_stores and dim_campaigns. It contains unique IDs, product & store information and campaign details, product prices and promotion information for AtliQ Mart's promotions and sales.
 
+![Screenshot 2024-03-02 141535](https://github.com/TripathiAmbrish/Ad-hoc-Analysis/assets/139352292/46c7485c-8520-4776-97eb-8510e984ea0f)
